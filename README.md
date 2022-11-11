@@ -88,9 +88,8 @@ Continue to the next section to install java.
 
 ```sh
 echo 'set PATH $HOME/.jenv/bin $PATH' >> ~/.config/fish/config.fish
-echo 'status --is-interactive; and source (jenv init -|psub)' >> ~/.config/fish/config.fish
+echo 'status --is-interactive; and jenv init - | source' >> ~/.config/fish/config.fish
 cp ~/.jenv/fish/jenv.fish ~/.config/fish/functions/jenv.fish
-cp ~/.jenv/fish/export.fish ~/.config/fish/functions/export.fish
 ```
 
 #### 1.2 Adding Your Java Environment
@@ -101,7 +100,7 @@ For example, on macOS, use `brew` to install the latest Java (OpenJDK 11) follow
 
 ```bash
 brew install --cask java
-jenv add $(/usr/libexec/java_home)
+jenv add "$(/usr/libexec/java_home)"
 ```
 
 With macOS OpenJDK 11.0.2 installed, for example, either of these commands will add `/Library/Java/JavaVirtualMachines/openjdk-11.0.2.jdk/Contents/Home` as a valid JVM. Your JVM directory may vary!
