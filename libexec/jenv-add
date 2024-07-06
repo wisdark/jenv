@@ -4,6 +4,11 @@
 set -e
 [ -n "$JENV_DEBUG" ] && set -x
 
+if [ "$#" -eq 0 ]; then
+  jenv-help --usage add >&2
+  exit 1
+fi
+
 # Provide jenv completions
 if [ "$1" = "--complete" ]; then
   echo "--skip-existing"
@@ -56,6 +61,7 @@ function add_alias(){
 	cd "${JENV_JAVAPATH}"
     JENV_JAVAPATH=$PWD
     cd - 2>&1 > /dev/null
+    mkdir -p "${JENV_ROOT}/versions"
 	ln -s  "${JENV_JAVAPATH}" "${JENV_ROOT}/versions/$1"
 	touch ${JENV_ROOT}/$1.time
     cinfo "$1 added"
